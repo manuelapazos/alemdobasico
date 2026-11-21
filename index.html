@@ -212,7 +212,7 @@ table.sheet{border-collapse:collapse; width:100%; min-width:920px; font-size:var
 .sheet td.id{font-variant-numeric:tabular-nums; color:var(--muted); white-space:nowrap}
 .sheet tbody tr:hover{background:var(--sunken)}
 
-/* Projetos */
+/* Fontes */
 .projects{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap:16px}
 .proj{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:20px; display:grid; gap:10px; align-content:start; position:relative; overflow:hidden; transition:transform .4s var(--ease), box-shadow .4s var(--ease)}
 .proj:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg)}
@@ -226,6 +226,32 @@ table.sheet{border-collapse:collapse; width:100%; min-width:920px; font-size:var
 .proj.open:hover{transform:none; box-shadow:none}
 .proj.open .plus{width:40px; height:40px; border-radius:12px; background:var(--brand-deep); color:var(--on-brand); display:grid; place-items:center; font-family:var(--f-display); font-weight:800; font-size:1.4rem}
 .proj.open p{color:var(--ink)}
+.src-grid{display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:18px; align-items:stretch}
+.src-panel{display:grid; gap:14px; align-content:start}
+.srclist{list-style:none; margin:0; padding:0; display:grid; gap:6px}
+.srcrow{width:100%; display:grid; grid-template-columns:auto minmax(0,1fr) auto; gap:12px; align-items:center; text-align:left; border:1px solid var(--line); background:var(--surface); border-radius:12px; padding:11px 14px; cursor:pointer; transition:border-color .2s, background .2s, transform .25s var(--ease)}
+.srcrow:hover{border-color:var(--c); background:var(--soft); transform:translateX(3px)}
+.srcrow .nm{display:block; font-weight:700; line-height:1.25}
+.srcrow .ty{display:block; font-size:.84rem; color:var(--muted); line-height:1.3}
+.srcrow .ct{display:inline-flex; align-items:center; gap:6px; font-size:.84rem; font-weight:700; color:var(--brand-text); white-space:nowrap; font-variant-numeric:tabular-nums}
+.srcrow .ct svg{width:14px; height:14px}
+.src-empty{border:1px dashed var(--line); border-radius:12px; padding:16px; display:grid; gap:10px; justify-items:start; font-size:var(--step--1); color:var(--muted)}
+.proj.open.big{padding:clamp(24px,4vw,40px); gap:16px; align-content:center}
+.proj.open.big h3{font-size:var(--step-2)}
+.proj.open.big p{font-size:var(--step-0)}
+.proj.open.big .plus{width:52px; height:52px; font-size:1.8rem; border-radius:14px}
+@media (max-width:900px){ .src-grid{grid-template-columns:1fr} }
+.bars{list-style:none; margin:0; padding:0; display:grid; gap:4px}
+.bar{width:100%; display:grid; grid-template-columns:minmax(150px,240px) minmax(0,1fr) 8.5ch; gap:14px; align-items:center; border:0; background:none; padding:8px 10px; border-radius:10px; cursor:pointer; text-align:left}
+.bar:hover{background:var(--sunken)}
+.bar .lb{font-size:var(--step--1); font-weight:500}
+.track{height:14px; background:var(--sunken); border-radius:999px; overflow:hidden}
+.fill{display:block; height:100%; width:var(--w); background:var(--brand-deep); border-radius:999px; transform-origin:left; animation:growX 1s var(--ease) both; animation-delay:var(--d,0s)}
+.bar:hover .fill{background:var(--brand)}
+@keyframes growX{from{transform:scaleX(0)}}
+.bar .n{font-variant-numeric:tabular-nums; font-size:.88rem; text-align:right; color:var(--muted)}
+.bar .n b{color:var(--ink); font-size:1rem}
+@media (max-width:560px){ .bar{grid-template-columns:minmax(0,1fr) auto} .track{grid-column:1 / -1; grid-row:2} }
 
 /* Dados */
 .data-grid{display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:18px; align-items:start}
@@ -401,7 +427,7 @@ html.reduce-motion{scroll-behavior:auto}
     </a>
     <nav class="nav" aria-label="Seções">
       <a href="#praticas">Banco de práticas</a>
-      <a href="#projetos">Projetos</a>
+      <a href="#fontes">Fontes</a>
       <a href="#dados">Dados gerais</a>
       <a href="#sobre">Conceito e método</a>
     </nav>
@@ -417,11 +443,11 @@ html.reduce-motion{scroll-behavior:auto}
   <div class="wrap">
     <p class="eyebrow">Repositório aberto · Ensino superior</p>
     <h1 id="titulo">Práticas inclusivas <span class="serif">além do básico</span></h1>
-    <p class="lede">Um repositório de pesquisa sobre inclusão de pessoas com deficiência na universidade. Cada registro traz a prática, o projeto de origem, o trecho da fonte e como aplicá-la em sala.</p>
+    <p class="lede">Um repositório de pesquisa sobre inclusão de pessoas com deficiência na universidade. Cada registro traz a prática, a fonte, um trecho do relato e como aplicá-la em sala.</p>
     <form class="bsearch" id="busca" role="search">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
       <label for="bq" class="sr-only">Buscar no repositório</label>
-      <input id="bq" type="search" placeholder="Busque por prática, tema, projeto ou palavra da fonte" autocomplete="off">
+      <input id="bq" type="search" placeholder="Busque por prática, tema, fonte ou palavra do relato" autocomplete="off">
       <button type="submit">Buscar</button>
     </form>
     <div class="suggest"><span>Experimente:</span>
@@ -431,7 +457,7 @@ html.reduce-motion{scroll-behavior:auto}
       <button type="button" data-q="autorregulação">autorregulação</button>
     </div>
     <div class="stats">
-      <div class="stat"><b id="n-proj">3</b><span>projetos</span></div>
+      <div class="stat"><b id="n-proj">3</b><span>fontes</span></div>
       <div class="stat"><b id="n-total">25</b><span>práticas catalogadas</span></div>
       <div class="stat"><b id="n-sala">9</b><span>aplicações em sala</span></div>
     </div>
@@ -462,7 +488,7 @@ html.reduce-motion{scroll-behavior:auto}
           </div>
           <div class="tools">
             <label class="sel" for="sort">Ordenar
-              <select id="sort"><option value="id">Código</option><option value="title">Título (A–Z)</option><option value="org">Projeto</option></select>
+              <select id="sort"><option value="id">Código</option><option value="title">Título (A–Z)</option><option value="org">Fonte</option></select>
             </label>
             <div class="seg" role="group" aria-label="Modo de visualização">
               <button id="v-list" aria-pressed="true">Lista</button>
@@ -481,16 +507,32 @@ html.reduce-motion{scroll-behavior:auto}
   </div>
 </section>
 
-<section class="section" id="projetos" aria-labelledby="h-proj">
+<section class="section" id="fontes" aria-labelledby="h-fontes">
   <div class="wrap">
     <div class="s-head">
       <div>
         <p class="eyebrow">Fontes</p>
-        <h2 id="h-proj">Projetos no <span class="serif">repositório</span></h2>
-        <p>Projetos, núcleos e programas cujas práticas estão registradas. Cada novo projeto entra como mais uma fonte de pesquisa.</p>
+        <h2 id="h-fontes">Fontes no <span class="serif">repositório</span></h2>
       </div>
     </div>
-    <div class="projects" id="projects"></div>
+    <div class="src-grid">
+      <div class="panel src-panel">
+        <div class="tsearch">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <label for="fq" class="sr-only">Buscar fontes</label>
+          <input id="fq" type="search" placeholder="Buscar fonte: UFMG, UFJF, um professor, um projeto…" autocomplete="off">
+        </div>
+        <p class="count" id="src-count" aria-live="polite"></p>
+        <ul class="srclist" id="srclist"></ul>
+        <div class="src-empty" id="src-empty" hidden></div>
+      </div>
+      <article class="proj open big">
+        <span class="plus" aria-hidden="true">+</span>
+        <h3>Sua prática aqui</h3>
+        <p>O repositório está aberto a novas experiências inclusivas, de projetos, docentes, alunos, técnicos e educadores. Envie uma prática com a classificação.</p>
+        <div><button class="cta" data-send>Enviar uma Boa Prática!</button></div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -500,21 +542,14 @@ html.reduce-motion{scroll-behavior:auto}
       <div>
         <p class="eyebrow">Dados gerais</p>
         <h2 id="h-dados">O repositório em <span class="serif">números</span></h2>
-        <p>Distribuição dos registros por tema, projeto e tipo de fonte.</p>
+        <p>Com que frequência cada tema aparece nos registros.</p>
       </div>
       <button class="ghost" id="copy-csv-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>Exportar base completa</button>
     </div>
-    <div class="data-grid">
-      <div class="panel">
-        <h3>Temas por projeto</h3>
-        <p class="hint">Número de registros. Um registro pode ter mais de um tema. Toque em um número para ver os registros.</p>
-        <div class="mscroll"><table class="matrix" id="matrix"></table></div>
-      </div>
-      <div class="panel">
-        <h3>Fontes por projeto</h3>
-        <p class="hint">Tipo de evidência por trás de cada registro.</p>
-        <table class="mini" id="sources"></table>
-      </div>
+    <div class="panel">
+      <h3>Temas mais frequentes</h3>
+      <p class="hint">Número de registros em cada tema e a parte do banco que eles representam. Um registro pode ter mais de um tema. Toque em um tema para ver os registros.</p>
+      <ol class="bars" id="bars"></ol>
     </div>
   </div>
 </section>
@@ -544,13 +579,13 @@ html.reduce-motion{scroll-behavior:auto}
       <div class="panel">
         <h3>Campos de cada registro</h3>
         <dl class="schema">
-          <div><dt>Código</dt><dd>Letra do projeto e número</dd></div>
-          <div><dt>Origem</dt><dd>Projeto, docente, aluno, técnico, educador ou outro</dd></div>
+          <div><dt>Código</dt><dd>Letra da fonte e número</dd></div>
+          <div><dt>Fonte</dt><dd>Projeto, docente, aluno, técnico, educador ou outro</dd></div>
           <div><dt>Temas</dt><dd>Um ou mais dos 9 temas do repositório</dd></div>
           <div><dt>Nível</dt><dd>Direto em sala, com equipe ou institucional</dd></div>
-          <div><dt>Fonte</dt><dd>Tipo de evidência e minutagem</dd></div>
-          <div><dt>Trecho</dt><dd>Fala ou resumo que sustenta o registro</dd></div>
-          <div><dt>Para levar à sala</dt><dd>Sugestão de aplicação docente</dd></div>
+          <div><dt>Método</dt><dd>Como a prática foi captada: entrevista, relato próprio, observação…</dd></div>
+          <div><dt>Trecho</dt><dd>Trecho do relato, escrito por quem envia</dd></div>
+          <div><dt>Para levar à sala</dt><dd>Dica de aplicação, escrita por quem envia</dd></div>
         </dl>
       </div>
     </div>
@@ -590,21 +625,18 @@ html.reduce-motion{scroll-behavior:auto}
     </div>
     <fieldset class="classif">
       <legend>Classificação da prática</legend>
-      <fieldset class="field"><legend>Origem da prática</legend><div class="chipset" id="s-origin"></div></fieldset>
+      <fieldset class="field"><legend>Fonte da prática</legend><div class="chipset" id="s-origin"></div></fieldset>
       <div class="grid2">
         <div class="field"><label for="s-proj" id="s-proj-l">Nome do projeto</label><input id="s-proj" list="proj-list" required placeholder="Escolha ou escreva"><datalist id="proj-list"></datalist><small id="s-proj-h">Pode ser um projeto que ainda não está no repositório.</small></div>
-        <div class="field"><label for="s-kind">Tipo de fonte</label>
-          <select id="s-kind" required><option value="">Selecione</option><option>Entrevista, com fala transcrita</option><option>Entrevista, em resumo</option><option>Documento ou material didático</option><option>Relato de quem aplica a prática</option></select></div>
+        <div class="field"><label for="s-method">Método de captação</label><input id="s-method" required placeholder="Ex.: entrevista, relato próprio, observação em aula"><small>Escreva com suas palavras como a prática foi registrada.</small></div>
       </div>
       <fieldset class="field"><legend>Temas <span class="opt-t">(escolha ao menos um)</span></legend><div class="chipset" id="s-cats"></div><p class="err" id="s-cats-err" role="alert" hidden>Escolha pelo menos um tema.</p></fieldset>
       <fieldset class="field"><legend>Nível de aplicação</legend><div class="chipset" id="s-level"></div></fieldset>
-      <div class="grid2">
-        <div class="field"><label for="s-ref">Referência ou minutagem <span class="opt-t">(opcional)</span></label><input id="s-ref" placeholder="Ex.: entrevista, 12:13–12:55"></div>
-        <div class="field"><label for="s-link">Link de apoio <span class="opt-t">(opcional)</span></label><input id="s-link" type="url" placeholder="https://"></div>
-      </div>
-      <div class="field"><label for="s-take">Para levar à sala <span class="opt-t">(opcional)</span></label><textarea id="s-take" rows="2" placeholder="Como um professor pode aplicar esta prática?"></textarea></div>
+      <div class="field"><label for="s-quote">Trecho do relato</label><textarea id="s-quote" required rows="3" placeholder="Uma fala ou um trecho curto que mostre a prática acontecendo."></textarea><small>Aparece em destaque no registro. Pode ser a fala de uma entrevista ou um trecho escrito por você.</small></div>
+      <div class="field"><label for="s-take">Para levar à sala</label><textarea id="s-take" required rows="3" placeholder="Como outras pessoas podem aplicar esta prática na própria sala?"></textarea><small>Uma dica de aplicação para quem passar por uma situação parecida.</small></div>
+      <div class="field"><label for="s-link">Link de apoio <span class="opt-t">(opcional)</span></label><input id="s-link" type="url" placeholder="https://"></div>
     </fieldset>
-    <label class="consent"><input type="checkbox" id="s-ok" required><span>Autorizo a curadoria do Somos Diversas a revisar, editar e publicar esta prática no repositório, com crédito ao projeto de origem.</span></label>
+    <label class="consent"><input type="checkbox" id="s-ok" required><span>Autorizo a curadoria do Somos Diversas a revisar, editar e publicar esta prática no repositório, com crédito à fonte.</span></label>
     <div class="dlg-foot" style="margin:0 -22px -22px">
       <p class="proto">Protótipo: o envio é simulado e nenhum dado sai desta página.</p>
       <div class="btns"><button type="button" class="ghost" data-close>Cancelar</button><button type="submit" class="cta">Enviar uma Boa Prática!</button></div>
@@ -654,15 +686,15 @@ html.reduce-motion{scroll-behavior:auto}
 <script>
 (function(){
 const ORGS = {
-  NAI:  {name:"NAI", full:"Núcleo de Acessibilidade e Inclusão", angle:"Núcleo institucional", c:"var(--nai)", soft:"var(--nai-soft)", shape:"circle",
+  NAI:  {name:"NAI", full:"Núcleo de Acessibilidade e Inclusão", angle:"Núcleo institucional", inst:"UFMG", c:"var(--nai)", soft:"var(--nai-soft)", shape:"circle",
          about:"Setor da UFMG que avalia, acompanha e orienta estudantes com deficiência, e forma servidores.",
          bullets:["Avaliação biopsicossocial nas vagas reservadas","Cartão de acessibilidade como ponte com o professor","Formação Inclusão com Atitude","Técnico de referência e encaminhamento"],
          material:"2 transcrições"},
-  PAFUD:{name:"PAFUD", full:"Projeto de educação física para pessoas com deficiência", angle:"Projeto de atividade física", c:"var(--pafud)", soft:"var(--pafud-soft)", shape:"square",
+  PAFUD:{name:"PAFUD", full:"Projeto de educação física para pessoas com deficiência (PAFUD)", angle:"Projeto de atividade física", inst:"UFMG", c:"var(--pafud)", soft:"var(--pafud-soft)", shape:"square",
          about:"Projeto de atividade física e esporte que coloca o participante no centro das adaptações.",
          bullets:["Avaliação e plano individual","Instruções visuais, inclusive em Libras","Portfólio de adaptações","Formação contínua dos estagiários"],
          material:"8 trechos com minutagem"},
-  ICEX: {name:"ICEx Acolhe", full:"Programa de acolhimento do ICEx", angle:"Programa de acolhimento", c:"var(--isex)", soft:"var(--isex-soft)", shape:"triangle",
+  ICEX: {name:"ICEx Acolhe", full:"Programa de acolhimento do ICEx", angle:"Programa de acolhimento", inst:"UFMG", c:"var(--isex)", soft:"var(--isex-soft)", shape:"triangle",
          about:"Núcleo de acolhimento do Instituto de Ciências Exatas. Entrevistada: Luana.",
          bullets:["Espaço de autorregulação, sem pergunta e sem julgamento","Espaço de cuidados parentais","Materiais didáticos acessíveis","Intérpretes de Libras com prioridade para a sala"],
          material:"9 trechos com minutagem"}
@@ -712,7 +744,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const norm = s => String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 const store = { get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} } };
 const root = document.documentElement;
-const KINDS = {fala:"Fala transcrita", relato:"Resumo da entrevista"};
+const method = p => p.method || "Entrevista";
 const orgKeys = Object.keys(ORGS);
 const ICON = {
   arrow:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>`,
@@ -763,13 +795,12 @@ const saved = new Set(), sent = [];
 
 /* Busca e filtros */
 const GROUPS = [
-  {key:"org", label:"Projeto", opts: orgKeys.map(k=>[k, ORGS[k].name]), test:(p,v)=>v.has(p.org)},
+  {key:"org", label:"Fonte", opts: orgKeys.map(k=>[k, ORGS[k].name]), test:(p,v)=>v.has(p.org)},
   {key:"cat", label:"Tema", opts: Object.entries(CATS), test:(p,v)=>p.cats.some(c=>v.has(c))},
-  {key:"level", label:"Nível de aplicação", opts: Object.entries(LEVELS), test:(p,v)=>v.has(p.level)},
-  {key:"kind", label:"Tipo de fonte", opts: Object.entries(KINDS), test:(p,v)=>v.has(p.kind)}
+  {key:"level", label:"Nível de aplicação", opts: Object.entries(LEVELS), test:(p,v)=>v.has(p.level)}
 ];
-const state = {q:"", org:new Set(), cat:new Set(), level:new Set(), kind:new Set(), sort:"id", view:"list"};
-P.forEach(p => p._h = norm([p.id,p.title,p.desc,p.quote,p.take,p.time,ORGS[p.org].name,ORGS[p.org].full,p.cats.map(c=>CATS[c]).join(" "),LEVELS[p.level]].join(" ")));
+const state = {q:"", org:new Set(), cat:new Set(), level:new Set(), sort:"id", view:"list"};
+P.forEach(p => p._h = norm([p.id,p.title,p.desc,p.quote,p.take,method(p),ORGS[p.org].name,ORGS[p.org].full,ORGS[p.org].inst,p.cats.map(c=>CATS[c]).join(" "),LEVELS[p.level]].join(" ")));
 function match(p, skip){
   const terms = norm(state.q).split(/\s+/).filter(Boolean);
   if(terms.length && !terms.every(t => p._h.includes(t))) return false;
@@ -826,14 +857,14 @@ function item(p, i){
       <button class="lnk" data-open="${p.id}">${ICON.open}Ver registro</button>
       <button class="lnk save" data-save="${p.id}" aria-pressed="${saved.has(p.id)}">${saveLabel(p.id)}</button>
       <button class="lnk" data-cite="${p.id}">${ICON.quote}Copiar citação</button>
-      <span class="src-t">${esc(KINDS[p.kind])} · ${esc(p.time)}</span>
+      <span class="src-t">${esc(method(p))}</span>
     </div>
   </article>`;
 }
 function table(list){
   return `<div class="table-scroll"><table class="sheet"><caption class="sr-only">Registros do repositório em tabela</caption>
-    <thead><tr><th scope="col">Código</th><th scope="col">Projeto</th><th scope="col">Prática</th><th scope="col">Temas</th><th scope="col">Nível</th><th scope="col">Fonte</th><th scope="col">Para levar à sala</th></tr></thead>
-    <tbody>${list.map(p=>`<tr><td class="id">${p.id}</td><td><span style="display:inline-flex;gap:6px;align-items:center;white-space:nowrap">${mark(p.org,11)}${esc(ORGS[p.org].name)}</span></td><td><button class="lnk" style="text-align:left" data-open="${p.id}">${esc(p.title)}</button></td><td>${esc(p.cats.map(c=>CATS[c]).join(", "))}</td><td>${esc(LEVELS[p.level])}</td><td>${esc(KINDS[p.kind])}<br><span class="muted">${esc(p.time)}</span></td><td>${esc(p.take)}</td></tr>`).join("")}</tbody></table></div>`;
+    <thead><tr><th scope="col">Código</th><th scope="col">Fonte</th><th scope="col">Prática</th><th scope="col">Temas</th><th scope="col">Nível</th><th scope="col">Método</th><th scope="col">Para levar à sala</th></tr></thead>
+    <tbody>${list.map(p=>`<tr><td class="id">${p.id}</td><td><span style="display:inline-flex;gap:6px;align-items:center;white-space:nowrap">${mark(p.org,11)}${esc(ORGS[p.org].name)}</span></td><td><button class="lnk" style="text-align:left" data-open="${p.id}">${esc(p.title)}</button></td><td>${esc(p.cats.map(c=>CATS[c]).join(", "))}</td><td>${esc(LEVELS[p.level])}</td><td>${esc(method(p))}</td><td>${esc(p.take)}</td></tr>`).join("")}</tbody></table></div>`;
 }
 function render(){
   const list = results();
@@ -851,46 +882,33 @@ mq.addEventListener("change", () => { $("#filters").open = !mq.matches; });
 /* Exportação */
 function csv(list){
   const q = s => `"${String(s).replace(/"/g,'""')}"`;
-  return [["Código","Projeto","Prática","Descrição","Temas","Nível de aplicação","Tipo de fonte","Referência","Trecho","Para levar à sala"].map(q).join(",")]
-    .concat(list.map(p => [p.id, ORGS[p.org].name, p.title, p.desc, p.cats.map(c=>CATS[c]).join("; "), LEVELS[p.level], KINDS[p.kind], p.time, p.quote, p.take].map(q).join(","))).join("\n");
+  return [["Código","Fonte","Prática","Descrição","Temas","Nível de aplicação","Método de captação","Trecho","Para levar à sala"].map(q).join(",")]
+    .concat(list.map(p => [p.id, ORGS[p.org].name, p.title, p.desc, p.cats.map(c=>CATS[c]).join("; "), LEVELS[p.level], method(p), p.quote, p.take].map(q).join(","))).join("\n");
 }
 $("#copy-csv").onclick = () => { const l = results(); copy(csv(l), `${l.length} registros copiados em CSV. Cole no Google Planilhas ou no Excel.`); };
 $("#copy-csv-2").onclick = () => copy(csv(P), `Base completa (${P.length} registros) copiada em CSV.`);
 
-/* Projetos */
-$("#projects").innerHTML = orgKeys.map(k => { const o = ORGS[k]; const n = P.filter(p=>p.org===k).length; return `
-  <article class="proj" style="--c:${o.c}">
-    ${big(k,"glyph")}
-    <h3>${mark(k,14)}${esc(o.name)}</h3>
-    <p class="type">${esc(o.angle)}</p>
-    <p>${esc(o.about)}</p>
-    <div class="meta"><span><b>${n}</b> registros</span><button class="lnk" data-proj="${k}">Ver registros ${ICON.arrow}</button></div>
-  </article>`; }).join("") + `
-  <article class="proj open">
-    <span class="plus" aria-hidden="true">+</span>
-    <h3>Sua prática aqui</h3>
-    <p>O repositório está aberto a novas experiências inclusivas, de projetos, docentes, alunos, técnicos e educadores. Envie uma prática com a classificação.</p>
-    <div><button class="cta" data-send>Enviar uma Boa Prática!</button></div>
-  </article>`;
+/* Fontes */
+function renderSources(){
+  const q = norm($("#fq").value.trim()), terms = q.split(/\s+/).filter(Boolean);
+  const list = orgKeys.filter(k => { const o = ORGS[k], h = norm([o.name, o.full, o.angle, o.inst, o.about].join(" ")); return terms.every(t => h.includes(t)); });
+  $("#src-count").textContent = q ? `${list.length} de ${orgKeys.length} fontes` : `${orgKeys.length} fontes`;
+  $("#srclist").innerHTML = list.map(k => { const o = ORGS[k], n = P.filter(p=>p.org===k).length; return `
+    <li><button class="srcrow" data-src="${k}" style="--c:${o.c};--soft:${o.soft}" aria-label="${esc(o.name)}, ${esc(o.angle)}, ${esc(o.inst)}: ver ${n} ${n===1?"registro":"registros"}">
+      ${mark(k,14)}<span><span class="nm">${esc(o.name)}</span><span class="ty">${esc(o.angle)} · ${esc(o.inst)}</span></span>
+      <span class="ct">${n} ${n===1?"registro":"registros"} ${ICON.arrow}</span></button></li>`; }).join("");
+  const empty = $("#src-empty"); empty.hidden = list.length > 0;
+  if(!list.length) empty.innerHTML = `<p>Nenhuma fonte encontrada para “${esc($("#fq").value.trim())}”. Conhece uma prática dessa fonte?</p><button class="cta" data-send>Enviar uma Boa Prática!</button>`;
+}
+$("#fq").addEventListener("input", renderSources);
+renderSources();
 
 /* Dados gerais */
-const count = (org, cat) => P.filter(p => p.org===org && p.cats.includes(cat)).length;
-const maxCell = Math.max(...orgKeys.flatMap(o => Object.keys(CATS).map(c => count(o,c))));
-const rows = Object.entries(CATS).map(([ck,cl]) => ({ck, cl, vals: orgKeys.map(o=>count(o,ck))}))
-  .map(r => ({...r, total: r.vals.reduce((s,v)=>s+v,0)})).sort((a,b) => b.total - a.total);
-$("#matrix").innerHTML = `<caption class="sr-only">Número de registros por tema e por projeto</caption>
-  <thead><tr><th scope="col"><span class="sr-only">Tema</span></th>${orgKeys.map(o=>`<th scope="col"><span>${mark(o)}${esc(ORGS[o].name)}</span></th>`).join("")}<th scope="col">Total</th></tr></thead>
-  <tbody>${rows.map(r => `<tr><th scope="row">${esc(r.cl)}</th>${r.vals.map((v,j) => {
-    const o = orgKeys[j];
-    if(!v) return `<td><button class="cell zero" disabled aria-label="${esc(ORGS[o].name)}, ${esc(r.cl)}: nenhum registro">·</button></td>`;
-    const k = v/maxCell;
-    return `<td><button class="cell" data-org="${o}" data-cat="${r.ck}" style="--c:${ORGS[o].c};--a:${Math.round(20 + k*80)}%;--tc:${k>.5?"var(--on-org)":"var(--ink)"}" aria-label="${esc(ORGS[o].name)}, ${esc(r.cl)}: ${v} ${v>1?"registros":"registro"}. Ver registros">${v}</button></td>`;
-  }).join("")}<td class="total">${r.total}</td></tr>`).join("")}</tbody>`;
-$("#matrix").addEventListener("click", e => { const b = e.target.closest("button.cell[data-org]"); if(!b) return; clearAll(); state.org.add(b.dataset.org); state.cat.add(b.dataset.cat); render(); goResults(); });
-const kc = (o,k) => P.filter(p => (!o || p.org===o) && p.kind===k).length;
-$("#sources").innerHTML = `<thead><tr><th scope="col">Projeto</th><th scope="col" class="n">Registros</th><th scope="col" class="n">Fala transcrita</th><th scope="col" class="n">Resumo</th></tr></thead>
-  <tbody>${orgKeys.map(o => `<tr><th scope="row" style="font-weight:400"><span style="display:inline-flex;gap:6px;align-items:center">${mark(o,11)}${esc(ORGS[o].name)}</span></th><td class="n">${P.filter(p=>p.org===o).length}</td><td class="n">${kc(o,"fala")}</td><td class="n">${kc(o,"relato")}</td></tr>`).join("")}</tbody>
-  <tfoot><tr><td>Total</td><td class="n">${P.length}</td><td class="n">${kc(null,"fala")}</td><td class="n">${kc(null,"relato")}</td></tr></tfoot>`;
+const themes = Object.entries(CATS).map(([k,l]) => ({k, l, n: P.filter(p => p.cats.includes(k)).length})).sort((a,b) => b.n - a.n || a.l.localeCompare(b.l,"pt"));
+const maxT = Math.max(...themes.map(x => x.n));
+$("#bars").innerHTML = themes.map((x,i) => { const pct = Math.round(x.n/P.length*100); return `<li><button class="bar" data-theme="${x.k}" aria-label="${esc(x.l)}: ${x.n} ${x.n===1?"registro":"registros"}, ${pct}% do banco. Ver registros">
+  <span class="lb">${esc(x.l)}</span><span class="track" aria-hidden="true"><span class="fill" style="--w:${(x.n/maxT*100).toFixed(1)}%;--d:${(i*.05).toFixed(2)}s"></span></span><span class="n" aria-hidden="true"><b>${x.n}</b> · ${pct}%</span></button></li>`; }).join("");
+$("#bars").addEventListener("click", e => { const b = e.target.closest("[data-theme]"); if(!b) return; clearAll(); state.cat.add(b.dataset.theme); render(); goResults(); });
 
 /* Diálogos */
 function openDlg(d){ if(!d.open) d.showModal(); d.scrollTop = 0; }
@@ -901,7 +919,7 @@ document.addEventListener("click", e => {
   const s = e.target.closest("[data-save]"); if(s){ toggleSave(s.dataset.save); return; }
   const ct = e.target.closest("[data-cite]"); if(ct){ const p = P.find(x=>x.id===ct.dataset.cite); copy(recCite(p), `Citação do registro ${p.id} copiada.`); return; }
   const sd = e.target.closest("[data-send]"); if(sd){ openSend(); return; }
-  const pj = e.target.closest("[data-proj]"); if(pj){ clearAll(); state.org.add(pj.dataset.proj); render(); goResults(); return; }
+  const sr = e.target.closest("[data-src]"); if(sr){ clearAll(); state.org.add(sr.dataset.src); render(); goResults(); return; }
   if(e.target.closest("[data-clear]")){ clearAll(); render(); }
 });
 
@@ -917,12 +935,12 @@ function openRec(id){
     <h3 style="font-size:1.6rem">${esc(p.title)}</h3>
     <p>${esc(p.desc)}</p>
     <dl class="fields">
-      <div><dt>Projeto de origem</dt><dd>${esc(o.full)}</dd></div>
+      <div><dt>Fonte</dt><dd>${esc(o.full)} · ${esc(o.inst)}</dd></div>
       <div><dt>Temas</dt><dd>${esc(p.cats.map(c=>CATS[c]).join(", "))}</dd></div>
       <div><dt>Nível de aplicação</dt><dd>${esc(LEVELS[p.level])}</dd></div>
-      <div><dt>Fonte</dt><dd>Entrevista · ${esc(KINDS[p.kind])} · ${esc(p.time)}</dd></div>
+      <div><dt>Método de captação</dt><dd>${esc(method(p))}</dd></div>
     </dl>
-    <div><p class="sub">Trecho da fonte</p><blockquote class="q">${p.kind==="fala" ? "“"+esc(p.quote)+"”" : esc(p.quote)}<small>${p.kind==="fala" ? "Fala transcrita" : "Resumo do grupo, sem transcrição literal"}</small></blockquote></div>
+    <div><p class="sub">Trecho do relato</p><blockquote class="q">${p.kind==="fala" ? "“"+esc(p.quote)+"”" : esc(p.quote.replace(/^Relato da entrevistada:\s*/,"").replace(/^./, c => c.toUpperCase()))}</blockquote></div>
     <div class="take"><span class="ic">${ICON.arrow}</span><p><b>Para levar à sala</b>${esc(p.take)}</p></div>
     <div><p class="sub">Sugestão de citação</p><p class="cite">${esc(recCite(p))}</p></div>
     ${rel.length ? `<div><p class="sub">Registros relacionados</p><ul class="rel">${rel.map(r => `<li><button data-open="${r.id}"><span class="rid">${r.id}</span>${mark(r.org,11)}<span>${esc(r.title)}</span></button></li>`).join("")}</ul></div>` : ""}`;
@@ -1013,7 +1031,7 @@ $("#f-send").addEventListener("submit", e => {
   if(!cats.length){ $("#s-cats-err").hidden = false; $("#s-cats input").focus(); return; }
   const level = $("#s-level input:checked").value;
   const origin = $("#s-origin input:checked").value;
-  const sub = {title: $("#s-subj").value.trim(), proj: `${ORIGINS[origin][0]} · ${$("#s-proj").value.trim()}`, cats, level, desc: $("#s-msg").value.trim(), take: $("#s-take").value.trim(), kind: $("#s-kind").value};
+  const sub = {title: $("#s-subj").value.trim(), proj: `${ORIGINS[origin][0]} · ${$("#s-proj").value.trim()}`, cats, level, desc: $("#s-msg").value.trim(), quote: $("#s-quote").value.trim(), take: $("#s-take").value.trim(), method: $("#s-method").value.trim()};
   if(user) sent.push(sub);
   $("#send-ok").innerHTML = `
     <div class="ok-state">
@@ -1028,7 +1046,9 @@ $("#f-send").addEventListener("submit", e => {
         <h3>${esc(sub.title)}</h3>
         <p class="desc">${esc(sub.desc)}</p>
         <div class="tags">${cats.map(c=>`<span class="tag">${esc(CATS[c])}</span>`).join("")}</div>
-        ${sub.take ? `<div class="take"><span class="ic">${ICON.arrow}</span><p><b>Para levar à sala</b>${esc(sub.take)}</p></div>` : ""}
+        <blockquote class="q" style="font-size:1.15rem">${esc(sub.quote)}</blockquote>
+        <div class="take"><span class="ic">${ICON.arrow}</span><p><b>Para levar à sala</b>${esc(sub.take)}</p></div>
+        <div class="rec-actions"><span class="src-t" style="margin-left:0">${esc(sub.method)}</span></div>
       </article>
     </div>
     ${user ? `<p class="muted">Você pode acompanhar este envio na sua área.</p>` : `<p class="muted">Com uma conta, você acompanha seus envios na sua área.</p>`}
